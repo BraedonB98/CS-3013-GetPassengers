@@ -5,12 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class GetPassengers : AppCompatActivity() {
+    var passengerList = mutableListOf<Passenger>()
+    private val accumListTextView: TextView
+        get() = findViewById(R.id.accum_list) // Ensure this ID matches your layout file
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,30 +26,26 @@ class GetPassengers : AppCompatActivity() {
             insets
         }
     }
-    public fun enterPassenger (v : View) {
-        //setFriendInfo("Olaf", "Torgiersen", "720-878-2233")
-        var textFirst = findViewById<EditText>(R.id.first_name)
-        var textLast = findViewById<EditText>(R.id.last_name)
-        var textPhone = findViewById<EditText>(R.id.phone_number)
-        // get the string versions of numbers
-        var firstName = textFirst.getText().toString()
-        var lastName = textLast.getText().toString()
-        var phoneNumber = textPhone.getText().toString()
-        //setFriendInfo(firstName, lastName, phoneNumber)
-        Intent().let { friendInfoIntent ->
-            friendInfoIntent.putExtra("first_name", firstName)
-            friendInfoIntent.putExtra("last_name", lastName)
-            friendInfoIntent.putExtra("phone_number", phoneNumber)
-            setResult(Activity.RESULT_OK, friendInfoIntent)
-            finish()
-        }
+
+    public fun enterPassenger(v: View) {
+        val textFirst = findViewById<EditText>(R.id.first_name)
+        val textLast = findViewById<EditText>(R.id.last_name)
+        val textPhone = findViewById<EditText>(R.id.phone_number)
+        val firstName = textFirst.text.toString()
+        val lastName = textLast.text.toString()
+        val phoneNumber = textPhone.text.toString()
+        val newPassenger = Passenger(lastName, firstName, phoneNumber)
+        passengerList.add(newPassenger)
+        accumListTextView.append("\n${newPassenger}")
     }
-    public fun backToMain(v : View) {
-        Intent().let { friendInfoIntent ->
-            //friendInfoIntent.putExtra("first_name", fName)
-            //friendInfoIntent.putExtra("last_name", lName)
-            //friendInfoIntent.putExtra("phone_number", phoneNum)
-            setResult(Activity.RESULT_OK, friendInfoIntent)
+
+    public fun backToMain(v: View) {
+        Intent().let { passengerInfoIntent ->
+            passengerInfoIntent.putExtra("COUNT", passengerList.size.toString())
+            for (i in passengerList.indices) {
+                passengerInfoIntent.putExtra("PASS$i", passengerList[i].toString())
+            }
+            setResult(Activity.RESULT_OK, passengerInfoIntent)
             finish()
         }
     }

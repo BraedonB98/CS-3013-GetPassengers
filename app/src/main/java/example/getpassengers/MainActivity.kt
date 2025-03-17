@@ -13,16 +13,14 @@ class MainActivity : AppCompatActivity() {
     private val showListTextView: TextView
         get() = findViewById(R.id.show_list) // Ensure this ID matches your layout file
 
-    private val passengers = mutableListOf<Passenger>()
-
     private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { activityResult ->
         val data = activityResult.data
-        val fName = data?.getStringExtra("first_name") ?: ""
-        val lName = data?.getStringExtra("last_name") ?: ""
-        val phoneNumber = data?.getStringExtra("phone_number") ?: ""
-        val newPassenger = Passenger(lName, fName, phoneNumber)
-        passengers.add(newPassenger)
-        addPassengerToTextView(newPassenger)
+        val count = ((data?.getStringExtra("COUNT") ?: "")).toInt()
+        showListTextView.text = ""
+        for (i in 0 until count) {
+            val passengerString = data?.getStringExtra("PASS$i") ?: ""
+            showListTextView.append("$passengerString\n")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,10 +35,6 @@ class MainActivity : AppCompatActivity() {
 
     fun getList(v: View) {
         startForResult.launch(Intent(this, GetPassengers::class.java))
-    }
-
-    private fun addPassengerToTextView(passenger: Passenger) {
-        showListTextView.append("${passenger}\n")
     }
 }
 
