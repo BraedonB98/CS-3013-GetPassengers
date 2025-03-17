@@ -45,6 +45,6 @@ class MainActivity : AppCompatActivity() {
 
 data class Passenger(val lName: String, val fName: String, val phone: String) {
     override fun toString(): String {
-        return "<<$fName $lName $phone>>"
+        return "$fName $lName $phone"
     }
 }
