@@ -22,7 +22,7 @@ class GetPassengers : AppCompatActivity() {
             insets
         }
     }
-    fun enterPassenger (v : View) {
+    public fun enterPassenger (v : View) {
         //setFriendInfo("Olaf", "Torgiersen", "720-878-2233")
         var textFirst = findViewById<EditText>(R.id.first_name)
         var textLast = findViewById<EditText>(R.id.last_name)
@@ -31,13 +31,20 @@ class GetPassengers : AppCompatActivity() {
         var firstName = textFirst.getText().toString()
         var lastName = textLast.getText().toString()
         var phoneNumber = textPhone.getText().toString()
-        setFriendInfo(firstName, lastName, phoneNumber)
-    }
-    private fun backToMain(v : View) {
+        //setFriendInfo(firstName, lastName, phoneNumber)
         Intent().let { friendInfoIntent ->
-            friendInfoIntent.putExtra("first_name", fName)
-            friendInfoIntent.putExtra("last_name", lName)
-            friendInfoIntent.putExtra("phone_number", phoneNum)
+            friendInfoIntent.putExtra("first_name", firstName)
+            friendInfoIntent.putExtra("last_name", lastName)
+            friendInfoIntent.putExtra("phone_number", phoneNumber)
+            setResult(Activity.RESULT_OK, friendInfoIntent)
+            finish()
+        }
+    }
+    public fun backToMain(v : View) {
+        Intent().let { friendInfoIntent ->
+            //friendInfoIntent.putExtra("first_name", fName)
+            //friendInfoIntent.putExtra("last_name", lName)
+            //friendInfoIntent.putExtra("phone_number", phoneNum)
             setResult(Activity.RESULT_OK, friendInfoIntent)
             finish()
         }
