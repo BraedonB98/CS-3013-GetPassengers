@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         startForResult.launch(Intent(this,
             GetPassengers::class.java))
     }
-    fun addFriendView(f: Friend) {
+    fun addPassengerView(f: Friend) {
         flag = !flag
         val textView = TextView(this)
         textView.text = f.toString()
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         linearLayout.addView(textView)
     }
 }
-class Friend(val lName:String, val fName: String, val phone: String) {
+class Passenger(val lName:String, val fName: String, val phone: String) {
     override fun toString () : String {
         var s = "<<" + this.fName + " " + this.lName + " " + this.phone + ">>"
         return s
