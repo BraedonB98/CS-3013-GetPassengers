@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/top_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
@@ -15,5 +16,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/get_list_button"
+        android:layout_width="0dp"
+        android:layout_weight = "1"
+        android:layout_height = "wrap_content"
+        android:text="GET PASSENGER LIST"
+        android:onClick="getList"
+        android:background="@color/yellow”/>
+         <TextView
+            android:id="@+id/downText"
+    android:layout_width="match_parent"
+    android:background="@color/blue"
+    android:layout_height="100dp"
+    android:fontFamily="cursive"
+    android:textAlignment = "center"
+    android:textSize = "48dp"
+    android:textStyle = "bold"
+    android:textColor="@color/red"
+    android:text="Lower!"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
