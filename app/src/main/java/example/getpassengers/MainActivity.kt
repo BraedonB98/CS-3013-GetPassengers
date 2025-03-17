@@ -1,4 +1,9 @@
 package example.getpassengers
+/*Braedon Bellamy
+Project 1 - CS-3013 - Get Passengers
+This app allows you to enter passenger info and have it displayed on the screen
+using multiple activities(pages).
+ */
 
 import android.content.Intent
 import android.os.Bundle
